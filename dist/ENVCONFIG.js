@@ -30,14 +30,12 @@ class EnvironmentVariables {
         this.SERVER_SECRET = process.env.SERVER_SECRET;
     }
     static sharedInstance() {
-        if (!EnvironmentVariables.instance) {
-            EnvironmentVariables.instance = new EnvironmentVariables();
-        }
         return EnvironmentVariables.instance;
     }
     getServerSecret() {
         return this.SERVER_SECRET;
     }
 }
+EnvironmentVariables.instance = new EnvironmentVariables();
 exports.default = EnvironmentVariables;
 //# sourceMappingURL=ENVCONFIG.js.map

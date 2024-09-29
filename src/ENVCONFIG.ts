@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv"
  export default class EnvironmentVariables {
-    private static instance: EnvironmentVariables;
+    private static instance: EnvironmentVariables = new EnvironmentVariables();
     private SERVER_SECRET: string;
 
     private constructor() {
@@ -9,9 +9,6 @@ import * as dotenv from "dotenv"
     }
 
     public static sharedInstance(): EnvironmentVariables {
-        if (!EnvironmentVariables.instance) {
-            EnvironmentVariables.instance = new EnvironmentVariables()
-        }
         return EnvironmentVariables.instance
     }
 
