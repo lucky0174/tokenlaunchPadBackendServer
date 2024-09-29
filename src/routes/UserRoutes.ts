@@ -77,4 +77,15 @@ router.get("/publickey", authMiddleWare , async (req: any, res) => {
         publickey: publickey
     })
 })
+
+router.get("/keys", authMiddleWare , async (req: any, res) => {
+    const userid = req.userid as string
+    const userData = await dbConfig.UserModel.findById(userid)
+    const privatekey = userData?.privatekey
+    res.status(200).json({
+        privatekey: privatekey,
+        publickey: userData?.publickey
+    })
+})
+
 export default router;
