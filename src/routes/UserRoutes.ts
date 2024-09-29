@@ -55,7 +55,8 @@ router.post("/signin",async (req, res)=>{
         }
     } catch(error) {
         res.status(404).json({
-            message: "not able to access db"
+            message: "not able to access db",
+            secret: config.SERVER_SECRET
         })
     }
 })
