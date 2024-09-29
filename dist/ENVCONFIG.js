@@ -23,20 +23,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = __importStar(require("jsonwebtoken"));
-const config = __importStar(require("../ENVCONFIG"));
-async function authMiddleWare(req, res, next) {
-    const token = req.headers.token;
-    const data = await jwt.verify(token, config.SERVER_SECRET);
-    if (data) {
-        req.userid = data.userid;
-        next();
-    }
-    else {
-        res.status(409).json({
-            message: "invalid token"
-        });
-    }
-}
-exports.default = authMiddleWare;
-//# sourceMappingURL=authMiddleWare.js.map
+exports.SERVER_SECRET = void 0;
+const dotenv = __importStar(require("dotenv"));
+const values = dotenv.config().parsed;
+exports.SERVER_SECRET = values.SERVER_SECRET;
+//# sourceMappingURL=ENVCONFIG.js.map

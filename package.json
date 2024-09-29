@@ -7,12 +7,15 @@
     "start": "node dist/index.js",
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "add-build": "git add dist",
+    "predev": "npm run build",
+    "dev": "tsc -w & nodemon dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^9.0.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0",

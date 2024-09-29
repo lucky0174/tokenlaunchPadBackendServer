@@ -1,15 +1,12 @@
 import express from "express";
 import { appendFile } from "fs";
-import { env } from "process";
 import * as jwt from "jsonwebtoken";
+import * as config  from "../ENVCONFIG"
 import dbConfig from "../dbConfiguration/ConnectTOMongo"
 import authMiddleWare from "../middlewares/authMiddleWare";
+import * as dotenv from "dotenv"
 
-const secret = env.SERVER_SECRET as string
 const router = express.Router()
-
-
-
 
 router.post("/signup", async (req,res) => {
     const email: string = req.body.email
@@ -51,7 +48,7 @@ router.post("/signin",async (req, res)=>{
         } else {
             const token = jwt.sign({
                 userid: userdata._id
-            }, secret)
+            }, config.SERVER_SECRET as string)
             res.status(200).json({
                 token: token
             })

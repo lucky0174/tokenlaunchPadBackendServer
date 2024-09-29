@@ -27,11 +27,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const process_1 = require("process");
 const jwt = __importStar(require("jsonwebtoken"));
+const config = __importStar(require("../ENVCONFIG"));
 const ConnectTOMongo_1 = __importDefault(require("../dbConfiguration/ConnectTOMongo"));
 const authMiddleWare_1 = __importDefault(require("../middlewares/authMiddleWare"));
-const secret = process_1.env.SERVER_SECRET;
 const router = express_1.default.Router();
 router.post("/signup", async (req, res) => {
     const email = req.body.email;
@@ -71,7 +70,7 @@ router.post("/signin", async (req, res) => {
         else {
             const token = jwt.sign({
                 userid: userdata._id
-            }, secret);
+            }, config.SERVER_SECRET);
             res.status(200).json({
                 token: token
             });
