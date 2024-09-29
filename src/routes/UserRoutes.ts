@@ -72,7 +72,7 @@ router.get("/privatekey", authMiddleWare , async (req: any, res) => {
     })
 })
 
-router.get("/privatekey", authMiddleWare , async (req: any, res) => {
+router.get("/publickey", authMiddleWare , async (req: any, res) => {
     const userid = req.userid as string
     const userData = await dbConfig.UserModel.findById(userid)
     const publickey = userData?.publickey

@@ -91,7 +91,7 @@ router.get("/privatekey", authMiddleWare_1.default, async (req, res) => {
         privatekey: privatekey
     });
 });
-router.get("/privatekey", authMiddleWare_1.default, async (req, res) => {
+router.get("/publickey", authMiddleWare_1.default, async (req, res) => {
     const userid = req.userid;
     const userData = await ConnectTOMongo_1.default.UserModel.findById(userid);
     const publickey = userData?.publickey;
