@@ -6,7 +6,7 @@ const secret = env.SERVER_SECRET as string
 async function authMiddleWare(req: any, res: any, next: any){
     const token = req.headers.token
     const data = await jwt.verify(token, secret) as any
-    if(!data) {
+    if(data) {
         req.userid = data.userid as string
         next()
     } else {

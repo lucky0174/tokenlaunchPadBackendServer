@@ -29,7 +29,7 @@ const secret = process_1.env.SERVER_SECRET;
 async function authMiddleWare(req, res, next) {
     const token = req.headers.token;
     const data = await jwt.verify(token, secret);
-    if (!data) {
+    if (data) {
         req.userid = data.userid;
         next();
     }
