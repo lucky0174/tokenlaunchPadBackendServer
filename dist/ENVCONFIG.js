@@ -23,8 +23,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SERVER_SECRET = void 0;
 const dotenv = __importStar(require("dotenv"));
-const values = dotenv.config().parsed;
-exports.SERVER_SECRET = values.SERVER_SECRET;
+class EnvironmentVariables {
+    constructor() {
+        dotenv.config();
+        this.SERVER_SECRET = process.env.SERVER_SECRET;
+    }
+    static sharedInstance() {
+        if (!EnvironmentVariables.instance) {
+            EnvironmentVariables.instance = new EnvironmentVariables();
+        }
+        return EnvironmentVariables.instance;
+    }
+    getServerSecret() {
+        return this.SERVER_SECRET;
+    }
+}
+exports.default = EnvironmentVariables;
 //# sourceMappingURL=ENVCONFIG.js.map

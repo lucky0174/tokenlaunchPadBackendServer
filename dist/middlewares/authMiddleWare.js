@@ -22,12 +22,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = __importStar(require("jsonwebtoken"));
-const config = __importStar(require("../ENVCONFIG"));
+require("../ENVCONFIG");
+const ENVCONFIG_1 = __importDefault(require("../ENVCONFIG"));
 async function authMiddleWare(req, res, next) {
     const token = req.headers.token;
-    const data = await jwt.verify(token, config.SERVER_SECRET);
+    const data = await jwt.verify(token, ENVCONFIG_1.default.sharedInstance().getServerSecret());
     if (data) {
         req.userid = data.userid;
         next();

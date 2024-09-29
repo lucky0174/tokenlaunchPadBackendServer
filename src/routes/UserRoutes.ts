@@ -1,10 +1,9 @@
 import express from "express";
-import { appendFile } from "fs";
 import * as jwt from "jsonwebtoken";
-import * as config  from "../ENVCONFIG"
-import dbConfig from "../dbConfiguration/ConnectTOMongo"
+import EnvironmentVariables, * as config from "../ENVCONFIG.js";
+import dbConfig from "../dbConfiguration/ConnectTOMongo";
 import authMiddleWare from "../middlewares/authMiddleWare";
-import * as dotenv from "dotenv"
+import "../ENVCONFIG"
 
 const router = express.Router()
 
@@ -48,7 +47,7 @@ router.post("/signin",async (req, res)=>{
         } else {
             const token = jwt.sign({
                 userid: userdata._id
-            }, config.SERVER_SECRET as string)
+            }, process.env.SERVER_SECRET as string)
             res.status(200).json({
                 token: token
             })
@@ -56,7 +55,7 @@ router.post("/signin",async (req, res)=>{
     } catch(error) {
         res.status(404).json({
             message: "not able to access db",
-            secret: config.SERVER_SECRET
+            secret: EnvironmentVariables.sharedInstance().getServerSecret()
         })
     }
 })

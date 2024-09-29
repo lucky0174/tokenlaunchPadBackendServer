@@ -28,9 +28,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const jwt = __importStar(require("jsonwebtoken"));
-const config = __importStar(require("../ENVCONFIG"));
+const ENVCONFIG_js_1 = __importDefault(require("../ENVCONFIG.js"));
 const ConnectTOMongo_1 = __importDefault(require("../dbConfiguration/ConnectTOMongo"));
 const authMiddleWare_1 = __importDefault(require("../middlewares/authMiddleWare"));
+require("../ENVCONFIG");
 const router = express_1.default.Router();
 router.post("/signup", async (req, res) => {
     const email = req.body.email;
@@ -70,7 +71,7 @@ router.post("/signin", async (req, res) => {
         else {
             const token = jwt.sign({
                 userid: userdata._id
-            }, config.SERVER_SECRET);
+            }, process.env.SERVER_SECRET);
             res.status(200).json({
                 token: token
             });
@@ -79,7 +80,7 @@ router.post("/signin", async (req, res) => {
     catch (error) {
         res.status(404).json({
             message: "not able to access db",
-            secret: config.SERVER_SECRET
+            secret: ENVCONFIG_js_1.default.sharedInstance().getServerSecret()
         });
     }
 });
