@@ -31,7 +31,7 @@ const userSchema = new monoDb.Schema({
     privatekey: { type: String, required: true }
 });
 async function ConnectToDB() {
-    monoDb.connect("mongodb+srv://adimulamyaswanth1:yasu2015@cluster0.npcfs.mongodb.net/tokenlaunchpad").then(() => {
+    monoDb.connect("<MONGO URL>").then(() => {
         console.log("successfully connected to DB");
     }).catch((e) => {
         console.log("can not connect to db");
